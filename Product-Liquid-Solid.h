@@ -6,8 +6,7 @@
 #define PRODUCT_LIQUID_SOLID_H
 
 #include <string>
-
-
+#include <ostream>
 
 class Product{
 protected:
@@ -19,14 +18,14 @@ public:
     Product()=delete;
     virtual ~Product() = default;
 
-    void GetPrice() const;
+    int GetPrice() const;
     int GetId() const;
     std::string GetName() const;
     char GetSize() const;
 
     void ChangePrice(int NewPrice);
 
-    virtual void display() const;
+    virtual void display(std::ostream& os) const;
     virtual void give() const;
 };
 
@@ -38,16 +37,14 @@ protected:
 public:
     LiquidProduct(const std::string& name, int id, int price, char size, int V, bool Sprkl);
 
-
     void ChangeVolume(int NewVolume);
 
     int GetVolumeML() const;
     bool GetIsSparkling() const;
 
-    virtual void display() const override;
+    virtual void display(std::ostream& os) const override;
     virtual void give() const override;
-   };
-
+};
 
 class SolidProduct: public Product{
 protected:
@@ -56,13 +53,13 @@ protected:
 public:
     SolidProduct(const std::string& name, int id, int price, char size, int M, bool CrflDsp);
 
-
     void ChangeMass(int NewMass);
 
     int GetMass() const;
     bool GetCarefulDisp() const;
 
-    virtual void display() const override;
+    virtual void display(std::ostream& os) const override;
     virtual void give() const override;
 };
+
 #endif
